@@ -1,0 +1,58 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\eralm\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add primereact primeflex primeicons
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\eralm\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Users\eralm\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\Calibre2;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Go\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\PuTTY;C:\Users\eralm\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\eralm\AppData\Local\Programs\Python\Python310;C:\Users\eralm\AppData\Local\Microsoft\WindowsApps;F:\Programs\Development\Microsoft VS Code\bin;C:\Users\eralm\AppData\Roaming\npm;C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64;C:\Users\eralm\AppData\Local\ComposerSetup\bin;C:\Users\eralm\AppData\Roaming\Composer\vendor\bin;C:\Users\eralm\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\eralm\AppData\Local\Programs\WinSCP;F:\Programs\Tools\KeePass Password Safe 2;C:\Users\eralm\AppData\Local\Postman;C:\Program Files\MySQL\MySQL Workbench 8.0 CE;C:\laragon;F:\Programs\Tools\MobaXterm;C:\Program Files\MySQL\MySQL Workbench 8.0 CE;C:\Program Files (x86)\Mobatek\MobaXterm;C:\flutter\bin;C:\Users\eralm\go\bin;C:\MinGW\bin;C:\Program Files\PostgreSQL\14\bin
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  16.10.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\Projects\BG\bg-admin\node_modules\node-sass\vendor\win32-x64-93\binding.node'
+
+npm manifest: 
+  {
+    "private": true,
+    "name": "remix-app-template",
+    "description": "",
+    "license": "",
+    "dependencies": {
+      "@remix-run/react": "^1.2.1",
+      "@remix-run/serve": "^1.2.1",
+      "cross-env": "^7.0.3",
+      "node-sass": "^7.0.1",
+      "react": "^17.0.2",
+      "react-dom": "^17.0.2",
+      "remix": "^1.2.1"
+    },
+    "devDependencies": {
+      "@remix-run/dev": "^1.2.1",
+      "@types/react": "^17.0.24",
+      "@types/react-dom": "^17.0.9",
+      "typescript": "^4.1.2"
+    },
+    "engines": {
+      "node": ">=14"
+    },
+    "sideEffects": false,
+    "scripts": {
+      "postinstall": "remix setup node",
+      "build": "cross-env NODE_ENV=production remix build",
+      "dev": "cross-env NODE_ENV=development remix dev",
+      "start": "cross-env NODE_ENV=production remix-serve build",
+      "build:css": "node-sass ./styles -o ./app/styles --output-style compressed",
+      "dev:css": "npm run build:css && node-sass -rw ./styles -o ./app/styles"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
