@@ -1,10 +1,10 @@
 import { useOutletContext, ContextType } from "remix";
-import { calculateRevenueSincYtd } from '~/helpers/sales';
+import { calculateRevenueYtd } from '~/helpers/sales';
 import moment from 'moment'
 
 export default function RevenueYtd() {
-    const { sales } = useOutletContext<ContextType>()
-    const revenueYtd = calculateRevenueSincYtd(sales)
+    const { salesSummary } = useOutletContext<ContextType>()
+    const revenueYtd = calculateRevenueYtd(salesSummary)
 
     return (<div className="card mb-0">
         <div className="flex justify-content-between mb-3">

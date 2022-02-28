@@ -3,8 +3,8 @@ import moment from 'moment'
 import { calculateTodaySalesSummary } from '~/helpers/sales'
 
 export default function TodaySales() {
-    const { sales } = useOutletContext<ContextType>()
-    const totalSalesToday = calculateTodaySalesSummary(sales)
+    const { salesSummary } = useOutletContext<ContextType>()
+    const totalSalesToday = calculateTodaySalesSummary(salesSummary)
 
     return (<div className="card mb-0">
         <div className="flex justify-content-between mb-3">

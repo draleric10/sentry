@@ -3,8 +3,8 @@ import { useOutletContext, ContextType } from "remix";
 import { calculateRevenueSinceLastMonth } from '~/helpers/sales';
 
 export default function Revenue() {
-    const { sales } = useOutletContext<ContextType>()
-    const revenueSinceLastMonth = calculateRevenueSinceLastMonth(sales)
+    const { salesSummary } = useOutletContext<ContextType>()
+    const revenueSinceLastMonth = calculateRevenueSinceLastMonth(salesSummary)
 
     return (<div className="card mb-0">
         <div className="flex justify-content-between mb-3">
