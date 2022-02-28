@@ -18,10 +18,13 @@ const calculateSalesBetweenDates = (startDate: string, endDate: string, branches
 const calculateRevenueSinceLastMonth = (branches: any) => {
     // sales since last month
     const startOfLastMonth = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD hh:mm');
-    const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD hh:mm');
-    const sales =  calculateSalesBetweenDates(startOfLastMonth, endOfThisMonth, branches)
+    const endOfLastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD hh:mm');
+    const salesLastMonth =  calculateSalesBetweenDates(startOfLastMonth, endOfLastMonth, branches)
 
-    return sales
+    const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD hh:mm');
+    const totalSalesFromLastToCurentMonth =  calculateSalesBetweenDates(startOfLastMonth, endOfThisMonth, branches)
+
+    return totalSalesFromLastToCurentMonth - salesLastMonth
 }
 
 export default function Revenue() {
