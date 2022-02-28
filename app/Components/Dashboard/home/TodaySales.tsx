@@ -1,6 +1,5 @@
+import { useOutletContext, ContextType } from "remix";
 import moment from 'moment'
-import { useOutletContext } from "remix";
-import type { ContextType } from "remix";
 
 const calculateTodaySalesSummary = (branches: any) => {
     // get all branches with transaction today.

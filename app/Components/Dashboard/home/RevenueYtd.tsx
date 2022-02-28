@@ -1,6 +1,6 @@
-import moment from 'moment'
 import { useOutletContext, ContextType } from "remix";
 import { calculateSalesBetweenDates } from '~/helpers/calculateSalesBetweenDates';
+import moment from 'moment'
 
 const calculateRevenueSinceLastMonth = (branches: any) => {
     // year to date sales
