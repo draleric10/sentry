@@ -1,19 +1,7 @@
 import moment from 'moment'
 import { useOutletContext } from "remix";
 import type { ContextType } from "remix";
-
-const calculateSalesBetweenDates = (startDate: string, endDate: string, branches: any) => {
-    // calculate last month sales
-    const branchSales = Object.values(branches).filter((val: any) => {
-        return moment(val.tranDate).isBetween(startDate, endDate)
-    })
-
-    const totalSales: number = branchSales.reduce((total: number, currentObj: any) => {
-        return total + parseFloat(currentObj.sales)
-    }, 0)
-
-    return totalSales;
-}
+import { calculateSalesBetweenDates } from '~/helpers/calculateSalesBetweenDates';
 
 const calculateRevenueSinceLastMonth = (branches: any) => {
     // sales since last month
