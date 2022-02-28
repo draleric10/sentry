@@ -20,13 +20,13 @@ export default function AppTopbar(props: any) {
             <ul className={classNames("layout-topbar-menu lg:flex origin-top", { 'layout-topbar-menu-mobile-active': props.mobileTopbarMenuActive })}>
                 <li>
                     <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
-                        <i className="pi pi-calendar" />
+                        <i className="pi pi-tags" />
                         <span>Events</span>
                     </button>
                 </li>
                 <li>
                     <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
-                        <i className="pi pi-cog" />
+                        <i className="pi pi-bell" />
                         <span>Settings</span>
                     </button>
                 </li>
