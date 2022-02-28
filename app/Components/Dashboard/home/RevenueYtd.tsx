@@ -20,8 +20,8 @@ export default function RevenueYtd() {
                 <span className="block text-500 font-medium mb-3">Revenue YTD</span>
                 <div className="text-900 font-medium text-xl">{totalSalesToday}</div>
             </div>
-            <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                <i className="pi pi-chart-line text-blue-500 text-xl" />
+            <div className="flex align-items-center justify-content-center bg-pink-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                <i className="pi pi-calendar-plus text-pink-500 text-xl" />
             </div>
         </div>
         {/* <span className="text-green-500 text-500 font-medium ">{moment().subtract(1, 'months').format('MMM')} -  {moment().format('MMM')}  </span>  */}
