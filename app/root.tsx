@@ -16,7 +16,7 @@ import themeStylesUrl from '~/styles/themes/lara-light-indigo/theme.css'
 import type { MetaFunction, LinksFunction } from "remix";
 
 export const meta: MetaFunction = () => {
-    return { title: "BG Admin" };
+    return { title: "Sentry" };
 };
 
 export const links: LinksFunction = () => [{

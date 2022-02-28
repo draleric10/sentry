@@ -2,7 +2,7 @@ import { Outlet, LoaderFunction, useLoaderData } from 'remix';
 import AppTopbar from '~/Components/Dashboard/AppTopbar';
 import AppMenu from '~/Components/Dashboard/AppMenu';
 
-import { menu } from '~/utils/menus'
+import { menu } from '~/helpers/menu'
 // import { getUser } from '~/services/db.service'
 import { getSalesSummary , getSalesDetails} from '~/services/firebase.service.js'
 

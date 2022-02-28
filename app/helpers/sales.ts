@@ -6,7 +6,7 @@ import moment from 'moment';
 export const calculateSalesBetweenDates = (startDate: string, endDate: string, sales: any) => {
     // Get branches' sales within date.
     const branchSales = Object.values(sales).filter((val: any) => {
-        return moment(val.tranDate).isBetween(startDate, endDate)
+        return moment(val.tranDate).isBetween(startDate, endDate, null, '[]')
     })
 
     const totalSales: number = branchSales.reduce((total: number, currentObj: any) => {
@@ -38,8 +38,8 @@ export const calculateTodaySalesSummary = (sales: any) => {
   - Revenue only last month.
 */
 export const calculateLastMonthSales = (sales: any) => {
-    const startOfLastMonth = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD hh:mm');
-    const endOfLastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD hh:mm');
+    const startOfLastMonth = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD');
+    const endOfLastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD');
     const salesLastMonth = calculateSalesBetweenDates(startOfLastMonth, endOfLastMonth, sales)
     return salesLastMonth
 }
@@ -49,8 +49,8 @@ export const calculateLastMonthSales = (sales: any) => {
   - Revenue since last month.
 */
 export const calculateRevenueSinceLastMonth = (sales: any) => {
-    const startOfLastMonth = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD hh:mm');
-    const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD hh:mm');
+    const startOfLastMonth = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD');
+    const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD');
     const totalSalesFromLastToCurentMonth = calculateSalesBetweenDates(startOfLastMonth, endOfThisMonth, sales)
 
     return totalSalesFromLastToCurentMonth
@@ -61,8 +61,8 @@ export const calculateRevenueSinceLastMonth = (sales: any) => {
 */
 export const calculateGrowthSinceLastMonth = (sales: any) => {
     const salesLastMonth = calculateLastMonthSales(sales)
-    const startOfThisMonth = moment().startOf('month').format('YYYY-MM-DD hh:mm');
-    const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD hh:mm');
+    const startOfThisMonth = moment().startOf('month').format('YYYY-MM-DD');
+    const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD');
     const salesCurrentMonth = calculateSalesBetweenDates(startOfThisMonth, endOfThisMonth, sales)
 
     return ((salesLastMonth + salesCurrentMonth) - salesLastMonth) / salesCurrentMonth * 100
@@ -73,8 +73,8 @@ export const calculateGrowthSinceLastMonth = (sales: any) => {
   -  Revenue Year to Date.
 */
 export const calculateRevenueYtd = (sales: any) => {
-    const startOfThisYear = moment().startOf('year').format('YYYY-MM-DD hh:mm')
-    const today = moment().format('YYYY-MM-DD hh:mm')
+    const startOfThisYear = moment().startOf('year').format('YYYY-MM-DD')
+    const today = moment().format('YYYY-MM-DD')
     const salesYtd = calculateSalesBetweenDates(startOfThisYear, today, sales)
     return salesYtd
 }
@@ -84,20 +84,17 @@ export const calculateRevenueYtd = (sales: any) => {
 */
 export const calculateGrossProfitYtd = (sales: any, salesDetails: any) => {
     const revenueSinceLastMonth = calculateRevenueSinceLastMonth(sales);
-
     const itemsSoldSinceLastMonth = calculateItemSoldYtd(salesDetails)
-    console.log("🚀 ~ file: sales.ts ~ line 89 ~ calculateGrossProfitYtd ~ itemsSoldSinceLastMonth", itemsSoldSinceLastMonth)
-
     return revenueSinceLastMonth - itemsSoldSinceLastMonth;
 }
 
 export const calculateItemSoldYtd = (salesDetails: any) => {
-    const startOfThisYear = moment().startOf('year').format('YYYY-MM-DD hh:mm')
-    const today = moment().format('YYYY-MM-DD hh:mm')
+    const startOfThisYear = moment().startOf('year').format('YYYY-MM-DD')
+    const today = moment().format('YYYY-MM-DD')
 
      // Get branches' sales within date.
      const itemsSold = Object.values(salesDetails).filter((val: any) => {
-        return moment(val.tranDate).isBetween(startOfThisYear, today)
+        return moment(val.tranDate).isBetween(startOfThisYear, today, null, '[]')
     })
 
     const itemsSoldAmount: number = itemsSold.reduce((total: number, currentSale: any) => {
@@ -112,3 +109,17 @@ export const calculateItemSoldYtd = (salesDetails: any) => {
     return itemsSoldAmount;
 }
 
+
+export const calculateRevenueLastWeek = (sales: any) => {
+    const startDateLastWeek = moment().startOf('week').subtract(1, 'weeks').format('YYYY-MM-DD')
+    const endDateLastWeek = moment().endOf('week').subtract(1, 'weeks').format('YYYY-MM-DD')
+    const revenue = calculateSalesBetweenDates(startDateLastWeek, endDateLastWeek, sales)
+    return revenue
+}
+
+export const calculateRevenueCurrentWeek = (sales: any) => {
+    const startDateCurrentWeek = moment().startOf('week').format('YYYY-MM-DD')
+    const endDateCurrentWeek = moment().endOf('week').format('YYYY-MM-DD')
+    const revenue = calculateSalesBetweenDates(startDateCurrentWeek, endDateCurrentWeek, sales)
+    return revenue
+}
