@@ -1,16 +1,39 @@
 import { db } from '~/utils/firebase'
 
-export async function getClientCollection(clientCode: string) {
-    clientCode = clientCode.toLowerCase();
-    const querySnapshot = await db.collection(clientCode).get();
-  
-    const data: any = [];
+async function getClientCollecton(clientCode: string) {
+    return await db.collection(clientCode.toLowerCase());
+}
 
-    querySnapshot.forEach((doc: any) => {
-      data.push({ ...doc.data(), id: doc.id });
-    });
-  
-    return data;
-  }
+export async function getInventories(clientCode: string) {
+    const clientCollection: any = await getClientCollecton(clientCode);
+    const valuation = await clientCollection.doc('inventory').collection('valuation').get();
+    const items: any = {}
+    valuation.forEach((doc: any) => {
+        items[doc.id] = { ...doc.data(), id: doc.id }
+    })
 
-  
+    return items;
+}
+
+export async function getSalesDetails(clientCode: string) {
+    const clientCollection: any = await getClientCollecton(clientCode);
+    const detailsCollection = await clientCollection.doc('sales').collection('details').get();
+    const details: any = {}
+    detailsCollection.forEach((doc: any) => {
+        details[doc.id] = { ...doc.data(), id: doc.id }
+    })
+
+    return details
+}
+
+export async function getSalesSummary(clientCode: string) {
+    const clientCollection: any = await getClientCollecton(clientCode);
+    const summaryCollection = await clientCollection.doc('sales').collection('summary').get();
+    const summary: any = {}
+    summaryCollection.forEach((doc: any) => {
+        summary[doc.id] = { ...doc.data(), id: doc.id }
+    })
+
+    return summary;
+}
+
