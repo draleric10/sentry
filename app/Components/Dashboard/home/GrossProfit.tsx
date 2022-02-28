@@ -16,6 +16,6 @@ export default function GrossProfit() {
             </div>
         </div>
         {/* <span className="text-green-500 text-500 font-medium ">{moment().subtract(1, 'months').format('MMM')} -  {moment().format('MMM')}  </span>  */}
-        <span className="text-500">since last month</span>
+        <span className="text-500">year to date</span>
     </div>)
 }
