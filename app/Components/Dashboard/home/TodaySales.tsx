@@ -1,23 +1,10 @@
 import { useOutletContext, ContextType } from "remix";
 import moment from 'moment'
-
-const calculateTodaySalesSummary = (branches: any) => {
-    // get all branches with transaction today.
-    const todays = Object.values(branches).filter((val: any) => {
-        return val.tranDate == moment().format('MM/DD/YYYY');
-    })
-
-    // calculate today's sales per branches.
-    const salestoday: number = todays.reduce((total: number, currentObj: any) => {
-        return total + parseFloat(currentObj.sales)
-    }, 0)
-
-    return salestoday
-}
+import { calculateTodaySalesSummary } from '~/helpers/sales'
 
 export default function TodaySales() {
-    const { salesSummary } = useOutletContext<ContextType>()
-    const totalSalesToday = calculateTodaySalesSummary(salesSummary)
+    const { sales } = useOutletContext<ContextType>()
+    const totalSalesToday = calculateTodaySalesSummary(sales)
 
     return (<div className="card mb-0">
         <div className="flex justify-content-between mb-3">

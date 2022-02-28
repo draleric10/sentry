@@ -7,18 +7,18 @@ import { getSalesSummary } from '~/services/firebase.service.js'
 
 export const loader: LoaderFunction = async () => {
     // const user: any = await getUser();
-    const salesSummary = await getSalesSummary('confluence')
+    const sales = await getSalesSummary('confluence')
 
     return {
         menu,
         // user,
-        salesSummary
+        sales
     }
 }
 
 export default function Dashboard() {
     // const { menu, user,  } = useLoaderData();
-    const { menu, salesSummary  } = useLoaderData();
+    const { menu, sales  } = useLoaderData();
  
     return <div className='layout-wrapper layout-static'>
         <AppTopbar />
@@ -27,7 +27,7 @@ export default function Dashboard() {
         </div>
 
         <div className="layout-main-container">
-            <Outlet context={{ salesSummary }} />
+            <Outlet context={{ sales }} />
         </div>
     </div>
 }

@@ -13,9 +13,10 @@ export default function Dashboard() {
                 <TodaySales />
             </div>
 
-            <div className="col-12 lg:col-6 xl:col-3">
+             <div className="col-12 lg:col-6 xl:col-3">
                 <Revenue />
             </div>
+
 
             <div className="col-12 lg:col-6 xl:col-3">
                 <Growth />
@@ -28,7 +29,7 @@ export default function Dashboard() {
           
             <div className="col-12 lg:col-6 xl:col-3">
                 <RevenueYtd />
-            </div>
+            </div> 
 
         </div>
     </div>

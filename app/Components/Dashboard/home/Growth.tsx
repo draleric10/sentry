@@ -1,30 +1,15 @@
 import { useOutletContext, ContextType } from "remix";
-import { calculateSalesBetweenDates } from '~/helpers/calculateSalesBetweenDates';
-import moment from 'moment'
-
-const calculateRevenueSinceLastMonth = (branches: any) => {
-    // last month sales
-    const startOfLastMonth = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD hh:mm');
-    const endOfLastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD hh:mm');
-    const salesLastMonth =  calculateSalesBetweenDates(startOfLastMonth, endOfLastMonth, branches)
-
-      // current month sales
-    const startOfThisMonth = moment().startOf('month').format('YYYY-MM-DD hh:mm');
-    const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD hh:mm');
-    const salesCurrentMonth =  calculateSalesBetweenDates(startOfThisMonth, endOfThisMonth, branches)
-   
-    return ((salesLastMonth + salesCurrentMonth) - salesLastMonth) / salesCurrentMonth * 100
-}
+import { calculateGrowthSinceLastMonth } from '~/helpers/sales';
 
 export default function Growth() {
-    const { salesSummary } = useOutletContext<ContextType>()
-    const totalSalesToday = calculateRevenueSinceLastMonth(salesSummary)
+    const { sales } = useOutletContext<ContextType>()
+    const growthSinceLastMonth = calculateGrowthSinceLastMonth(sales)
 
     return (<div className="card mb-0">
         <div className="flex justify-content-between mb-3">
             <div>
                 <span className="block text-500 font-medium mb-3">Growth</span>
-                <div className="text-900 font-medium text-xl">{totalSalesToday} % </div>
+                <div className="text-900 font-medium text-xl">{growthSinceLastMonth} % </div>
             </div>
             <div className="flex align-items-center justify-content-center bg-green-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                 <i className="pi pi-chart-line text-green-500 text-xl" />
