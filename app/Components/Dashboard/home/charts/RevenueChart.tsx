@@ -1,29 +1,34 @@
 import { Chart } from 'primereact/chart';
-import { calculateRevenueLastWeek, calculateRevenueCurrentWeek } from '~/helpers/sales';
+import { calculateRevenueLastWeek, calculateRevenueCurrentWeek, calculateRevenueYtd, calculateRevenueCurrentWeekDays, calculateRevenuePreviousWeekDays } from '~/helpers/sales';
 import { useOutletContext, ContextType } from "remix";
+import moment from 'moment'
+import randomColor from 'randomcolor'
 
 export default function RevenueChart() {
     const { salesSummary } = useOutletContext<ContextType>()
     const revenueLastWeek = calculateRevenueLastWeek(salesSummary)
     const revenueCurrentWeek = calculateRevenueCurrentWeek(salesSummary)
+    const revenueYtd = calculateRevenueYtd(salesSummary)
+    const revenueCurrentWeekDays = calculateRevenueCurrentWeekDays(salesSummary)
+    const revenuePreviousWeekDays = calculateRevenuePreviousWeekDays(salesSummary)
 
     const lineData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         datasets: [
             {
-                label: 'First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                label: 'Current Week',
+                data: [...revenueCurrentWeekDays],
                 fill: false,
-                backgroundColor: '#2f4860',
-                borderColor: '#2f4860',
+                backgroundColor: randomColor(),
+                borderColor: randomColor(),
                 tension: .4
             },
             {
-                label: 'Second Dataset',
-                data: [28, 48, 40, 19, 86, 27, 90],
+                label: 'Last Week',
+                data: [...revenuePreviousWeekDays],
                 fill: false,
-                backgroundColor: '#00bb7e',
-                borderColor: '#00bb7e',
+                backgroundColor: randomColor(),
+                borderColor: randomColor(),
                 tension: .4
             }
         ]
@@ -60,13 +65,18 @@ export default function RevenueChart() {
     return <div className="card">
         <h5>Revenue</h5>
         <div className="grid mb-2">
-            <div className="col-6 text-center">
+            <div className="col-4 text-center">
                 <p>Current Week</p>
                 <b>{revenueCurrentWeek}</b>
             </div>
-            <div className="col-6 text-center">
+            <div className="col-4 text-center">
                 <p>Previous Week</p>
                 <b>{revenueLastWeek}</b>
+            </div>
+
+            <div className="col-4 text-center">
+                <p>Total Earnings for the Year {moment().format('YYYY')}</p>
+                <b>{revenueYtd}</b>
             </div>
         </div>
 

@@ -3,11 +3,21 @@ import moment from 'moment';
 /*
   - Sales between dates.
 */
-export const calculateSalesBetweenDates = (startDate: string, endDate: string, sales: any) => {
+export const getBranchSalesBetweenDates = (startDate: string, endDate: string, sales: any) => {
     // Get branches' sales within date.
     const branchSales = Object.values(sales).filter((val: any) => {
         return moment(val.tranDate).isBetween(startDate, endDate, null, '[]')
     })
+
+    return branchSales;
+}
+
+
+/*
+  - Sales between dates.
+*/
+export const calculateSalesBetweenDates = (startDate: string, endDate: string, sales: any) => {
+    const branchSales = getBranchSalesBetweenDates(startDate, endDate, sales)
 
     const totalSales: number = branchSales.reduce((total: number, currentObj: any) => {
         return total + parseFloat(currentObj.sales)
@@ -92,8 +102,8 @@ export const calculateItemSoldYtd = (salesDetails: any) => {
     const startOfThisYear = moment().startOf('year').format('YYYY-MM-DD')
     const today = moment().format('YYYY-MM-DD')
 
-     // Get branches' sales within date.
-     const itemsSold = Object.values(salesDetails).filter((val: any) => {
+    // Get branches' sales within date.
+    const itemsSold = Object.values(salesDetails).filter((val: any) => {
         return moment(val.tranDate).isBetween(startOfThisYear, today, null, '[]')
     })
 
@@ -122,4 +132,51 @@ export const calculateRevenueCurrentWeek = (sales: any) => {
     const endDateCurrentWeek = moment().endOf('week').format('YYYY-MM-DD')
     const revenue = calculateSalesBetweenDates(startDateCurrentWeek, endDateCurrentWeek, sales)
     return revenue
+}
+
+export const calculateRevenueCurrentWeekDays = (sales: any) => {
+    const startDateCurrentWeek = moment().startOf('week').format('YYYY-MM-DD')
+    const endDateCurrentWeek = moment().endOf('week').format('YYYY-MM-DD')
+
+    // Get branches' sales within date.
+    const branchSales = getBranchSalesBetweenDates(startDateCurrentWeek, endDateCurrentWeek, sales)
+
+    return calculateWeekDaysSales(branchSales);
+}
+
+export const calculateRevenuePreviousWeekDays = (sales: any) => {
+    const startDatePreviousWeek = moment().subtract(1, 'weeks').startOf('week').format('YYYY-MM-DD')
+    const endDatePreviousWeek = moment().subtract(1, 'weeks').endOf('week').format('YYYY-MM-DD')
+
+    // Get branches' sales within date.
+    const branchSales = Object.values(sales).filter((val: any) => {
+        return moment(val.tranDate).isBetween(startDatePreviousWeek, endDatePreviousWeek, null, '[]')
+    })
+  
+    console.log('last week days:',calculateWeekDaysSales(branchSales));
+    
+   return calculateWeekDaysSales(branchSales);
+}
+
+
+const calculateWeekDaysSales = (sales:any) => {
+    const weekSales: any = {};
+
+    sales.forEach((sale: any) => {
+        let keyName: number = moment(sale.tranDate).isoWeekday();
+
+        if (!weekSales.hasOwnProperty(keyName)) {
+            weekSales[keyName] = parseFloat(sale.sales)
+        } else {
+            weekSales[keyName] += parseFloat(sale.sales)
+        }
+    })
+
+    for (let i = 1; i <= 7; i++) {
+        if (!weekSales.hasOwnProperty(i)) {
+            weekSales[i] = 0
+        }
+    }
+
+    return Object.values(weekSales);
 }
