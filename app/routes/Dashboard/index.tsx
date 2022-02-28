@@ -1,4 +1,5 @@
 
+import Growth from "~/Components/Dashboard/home/Growth"
 import Revenue from "~/Components/Dashboard/home/Revenue"
 import TodaySales from "~/Components/Dashboard/home/TodaySales"
 
@@ -15,7 +16,7 @@ export default function Dashboard() {
             </div>
 
             <div className="col-12 lg:col-6 xl:col-3">
-                <Revenue />
+                <Growth />
             </div>
 
             <div className="col-12 lg:col-6 xl:col-3">

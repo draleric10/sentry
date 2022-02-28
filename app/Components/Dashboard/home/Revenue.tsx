@@ -16,17 +16,12 @@ const calculateSalesBetweenDates = (startDate: string, endDate: string, branches
 }
 
 const calculateRevenueSinceLastMonth = (branches: any) => {
-    // last month sales
+    // sales since last month
     const startOfLastMonth = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD hh:mm');
-    const endOfLastMonth = moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD hh:mm');
-    const salesLastMonth = calculateSalesBetweenDates(startOfLastMonth, endOfLastMonth, branches)
-    
-    // current month sales
-    const startOfThisMonth = moment().startOf('month').format('YYYY-MM-DD hh:mm');
     const endOfThisMonth = moment().endOf('month').format('YYYY-MM-DD hh:mm');
-    const salesCurrentMonth =  calculateSalesBetweenDates(startOfThisMonth, endOfThisMonth, branches)
+    const sales =  calculateSalesBetweenDates(startOfLastMonth, endOfThisMonth, branches)
 
-    return salesCurrentMonth + salesLastMonth
+    return sales
 }
 
 export default function Revenue() {
@@ -39,11 +34,10 @@ export default function Revenue() {
                 <span className="block text-500 font-medium mb-3">Revenue</span>
                 <div className="text-900 font-medium text-xl">{totalSalesToday}</div>
             </div>
-            <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                <i className="pi pi-chart-line text-blue-500 text-xl" />
+            <div className="flex align-items-center justify-content-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                <i className="pi pi-money-bill text-orange-500 text-xl" />
             </div>
         </div>
-        <span className="text-green-500 text-500 font-medium ">{moment().subtract(1, 'months').format('MMM')} -  {moment().format('MMM')}  </span> 
         <span className="text-500">since last month</span>
     </div>)
 }
