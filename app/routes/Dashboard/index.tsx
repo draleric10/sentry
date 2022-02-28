@@ -1,57 +1,77 @@
-import { Outlet, LoaderFunction, useLoaderData } from 'remix';
-import AppTopbar from '~/Components/Dashboard/AppTopbar';
-import AppMenu from '~/Components/Dashboard/AppMenu';
-
-
-export const loader: LoaderFunction = async () => {
-    return {
-        menu: [
-            {
-                label: 'Home',
-                items: [{
-                    label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/dashboard'
-                }]
-            },
-            {
-                label: 'UI Components', icon: 'pi pi-fw pi-sitemap',
-                items: [
-                    { label: 'Sales', icon: 'pi pi-fw pi-id-card', to: '/formlayout' },
-                    { label: 'Analytics', icon: 'pi pi-fw pi-check-square', to: '/input' },
-                    { label: "Branches", icon: "pi pi-fw pi-bookmark", to: "/floatlabel" },
-                ]
-            },
-            {
-                label: 'Reventory', icon: 'pi pi-fw pi-search',
-                items: [
-                    {
-                        label: 'Create Items', icon: 'pi pi-fw pi-home', to: '/'
-                    },
-                    {
-                        label: 'Item Master', icon: 'pi pi-fw pi-bookmark',
-                        items: [
-                            {
-                                label: 'Reference', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Category', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Brand', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
-                        ]
-                    },
-                ]
-            },
-        ]
-    }
-}
-
 export default function Dashboard() {
-    const { menu } = useLoaderData();
-  
     return <div>
-        <AppTopbar />
-        <div className="layout-sidebar" >
-            <AppMenu menu={menu}/>
+        <h1>Dashboard home</h1>
+
+        <div className="grid">
+
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Orders</span>
+                            <div className="text-900 font-medium text-xl">152</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-shopping-cart text-blue-500 text-xl" />
+                        </div>
+                    </div>
+                    <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span>
+                </div>
+            </div>
+
+
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Revenue</span>
+                            <div className="text-900 font-medium text-xl">152</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-shopping-cart text-blue-500 text-xl" />
+                        </div>
+                    </div>
+                    <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span>
+                </div>
+            </div>
+
+
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Growth</span>
+                            <div className="text-900 font-medium text-xl">152</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-shopping-cart text-blue-500 text-xl" />
+                        </div>
+                    </div>
+                    <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span>
+                </div>
+            </div>
+
+            <div className="col-12 lg:col-6 xl:col-3">
+                <div className="card mb-0">
+                    <div className="flex justify-content-between mb-3">
+                        <div>
+                            <span className="block text-500 font-medium mb-3">Growth Profit / Margin</span>
+                            <div className="text-900 font-medium text-xl">152</div>
+                        </div>
+                        <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
+                            <i className="pi pi-shopping-cart text-blue-500 text-xl" />
+                        </div>
+                    </div>
+                    <span className="text-green-500 font-medium">24 new </span>
+                    <span className="text-500">since last visit</span>
+                </div>
+            </div>
+
         </div>
-        <Outlet />
+
+
     </div>
 }

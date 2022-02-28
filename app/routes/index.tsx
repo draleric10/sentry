@@ -1,10 +1,5 @@
+import { LoaderFunction, redirect } from 'remix';
 
-import { Outlet } from 'remix';
-
-export default function Index() {
-    return (
-      <div>
-          <Outlet/>
-      </div>
-    );
-}
+export const loader: LoaderFunction = async () => {
+  return redirect('/dashboard');
+};

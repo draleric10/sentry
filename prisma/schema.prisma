@@ -1,5 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
+  output          = "../node_modules/.prisma/client"
   previewFeatures = ["mongoDb"]
 }
 
@@ -9,16 +10,32 @@ datasource db {
 }
 
 model Master_Client {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id           String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  active_yn    String
+  contact_name String
+  logo_tx      String
+  ref_cd       String
+  ref_name     String
+  users        Master_User[]
 }
 
 model Master_User {
-  id            String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  active_yn     String
-  clientid_no   String
-  email_address String
-  first_name    String
-  groupid_no    String
-  img_tx        String
-  last_name     String
+  id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  active_yn  Boolean
+  client_id  String  @db.ObjectId
+  client     Master_Client @relation(fields: [client_id], references:[id])
+  email      String  @unique
+  first_name String
+  group_id   String  @db.ObjectId
+  group      Ref_User_Group @relation(fields: [group_id], references:[id])
+  img_tx     String
+  last_name  String
+  password   String
+}
+
+model Ref_User_Group {
+  id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  ref_cd String
+  ref_nm String
+  users  Master_User[]
 }
