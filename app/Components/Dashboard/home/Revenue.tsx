@@ -10,6 +10,7 @@ const calculateRevenueSinceLastMonth = (branches: any) => {
     const totalSalesFromLastToCurentMonth =  calculateSalesBetweenDates(startOfLastMonth, endOfThisMonth, branches)
 
     return totalSalesFromLastToCurentMonth
+}
 
 export default function Revenue() {
     const { salesSummary } = useOutletContext<ContextType>()
