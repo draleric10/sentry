@@ -1,9 +1,11 @@
 function Brand() {
     return (
-      <div>
-          <h3>Brand</h3>
-      </div>
+        <div>
+            <div className="card">
+                <h3>Brand</h3>
+            </div>
+        </div>
     )
-  }
-  
-  export default Brand
+}
+
+export default Brand

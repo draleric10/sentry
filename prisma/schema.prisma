@@ -16,13 +16,39 @@ model Master_Client {
   logo_tx      String
   ref_cd       String
   ref_name     String
-  users        Master_User[]
+   users        Master_User[]
+}
+
+model Master_Item {
+  id           String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  catid_no     String   @db.ObjectId
+  category     Ref_Item_Category @relation(fields: [catid_no], references:[id])
+  cost_am      String
+  create_id_no String   @db.ObjectId
+  created_at   DateTime
+  desc_nm      String
+  img_tx       String
+  price_am     String
+  ref_cd       String
+  ref_nm       String
+  sc_yn        Boolean
+  supid_ar     String   @db.ObjectId
+  supplier     Master_Supplier @relation(fields: [supid_ar], references:[id])
+  update_id_no String   @db.ObjectId
+  updated_at   DateTime
+}
+
+model Master_Supplier {
+  id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  ref_cd String
+  ref_nm String
+  items Master_Item[]
 }
 
 model Master_User {
   id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
   active_yn  Boolean
-  client_id  String  @db.ObjectId
+client_id  String  @db.ObjectId
   client     Master_Client @relation(fields: [client_id], references:[id])
   email      String  @unique
   first_name String
@@ -31,6 +57,13 @@ model Master_User {
   img_tx     String
   last_name  String
   password   String
+}
+
+model Ref_Item_Category {
+  id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  ref_cd String
+  ref_nm String
+  items Master_Item[]
 }
 
 model Ref_User_Group {

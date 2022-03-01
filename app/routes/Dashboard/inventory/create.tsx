@@ -1,9 +1,11 @@
 function CreateItem() {
     return (
-      <div>
-          <h3>Create Item</h3>
-      </div>
+        <div>
+            <div className="card">
+                <h3>Create Item</h3>
+            </div>
+        </div>
     )
-  }
-  
-  export default CreateItem
+}
+
+export default CreateItem
